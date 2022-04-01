@@ -22,7 +22,7 @@
     ├── order.py             # Order class
     ├── product.py           # Product class
     ├── user.py              # User class
-└── main.py                  # main test file
+└── test.py                  # unit test file
 ```
 ### Test
 `python test.py`
