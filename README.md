@@ -16,6 +16,7 @@
     ├── promotion            
         ├── __init__.py      # Promotion class
         ├── action.py
+        ├── limit.py
         ├── rule.py
     ├── __init__.py
     ├── calculator.py        # Calculator class
