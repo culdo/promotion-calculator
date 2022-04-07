@@ -137,7 +137,7 @@ class TestOrder(unittest.TestCase):
         self.assertEqual(order.discount_total, 0, "wrong discount_total")
         self.assertEqual(order.payment_total, 120, "wrong payment_total")
 
-        next_month = date.today().replace(month=date.today().month + 1 % 12)
+        next_month = date.today().replace(month=(date.today().month + 1) % 12)
 
         with patch('models.order.date') as mock_date:
             mock_date.today.return_value = next_month
