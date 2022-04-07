@@ -5,6 +5,7 @@ from models.order import Order
 from models.product import Product
 from models.promotion import Promotion
 from models.promotion.action import FlatPercentDiscount, FlatRateDiscount, CreatingLineItems
+from models.promotion.limit import UsageLimit, PerUserLimit, PerMonthLimit
 from models.promotion.rule import ItemTotalRule, ProductRule
 from models.user import User
 import unittest
@@ -77,7 +78,7 @@ class TestOrder(unittest.TestCase):
                  Product(product_id=2, price=40),
                  Product(product_id=3, price=50)]
         promotion = Promotion(pid=4, rule=ItemTotalRule(amount_min=x),
-                              action=FlatRateDiscount(amount=y), usage_limits=n)
+                              action=FlatRateDiscount(amount=y), limit=UsageLimit(n))
         order = Order(order_id=41, user=user, items=items, promotion=promotion)
         self.assertEqual(order.item_total, 120, "wrong item_total")
         self.assertEqual(order.discount_total, 30, "wrong discount_total")
@@ -97,7 +98,7 @@ class TestOrder(unittest.TestCase):
                  Product(product_id=2, price=40),
                  Product(product_id=3, price=50)]
         promotion = Promotion(pid=5, rule=ItemTotalRule(amount_min=x),
-                              action=FlatPercentDiscount(flat_percent=z), amount_per_user_limits=n)
+                              action=FlatPercentDiscount(flat_percent=z), limit=PerUserLimit(n))
         user = User(user_id=51)
         order = Order(order_id=51, user=user, items=items, promotion=promotion)
         self.assertEqual(user.user_id, 51, "wrong user_id")
@@ -123,7 +124,7 @@ class TestOrder(unittest.TestCase):
                  Product(product_id=2, price=40),
                  Product(product_id=3, price=50)]
         promotion = Promotion(pid=6, rule=ItemTotalRule(amount_min=x),
-                              action=FlatRateDiscount(amount=y), amount_per_month_limits=n)
+                              action=FlatRateDiscount(amount=y), limit=PerMonthLimit(n))
         order = Order(order_id=61, user=user, items=items, promotion=promotion)
         self.assertEqual(order.item_total, 120, "wrong item_total")
         self.assertEqual(order.discount_total, 30, "wrong discount_total")
@@ -139,7 +140,7 @@ class TestOrder(unittest.TestCase):
 
         next_month = date.today().replace(month=(date.today().month + 1) % 12)
 
-        with patch('models.order.date') as mock_date:
+        with patch('models.promotion.limit.date') as mock_date:
             mock_date.today.return_value = next_month
             mock_date.side_effect = lambda *args, **kw: date(*args, **kw)
 
