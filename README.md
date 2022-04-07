@@ -35,7 +35,7 @@
 舉例來說,付款可能發生各種異常:網路不順、金流方較慢或噴錯(例如回 5XX)、信用卡失效。
 不能發生少收錢、多收錢的狀況,沒收到的必須要之後可以再次執行。
 ```
-![Parklots Diagram](https://user-images.githubusercontent.com/26900749/161310982-0892b2a1-2e5e-48a7-a150-299981c7863b.jpg)
+![Parklots Diagram2](https://user-images.githubusercontent.com/26900749/162179862-b0119cd7-3d29-4ac9-baa8-127ce40762a9.jpg)
 ## Parking lots backend system
 請以要向其他工程師說明架構的場合,畫出系統架構圖。設計一個提供停車場站資料
 給全台灣大量用戶使用的系統架構。請以提供給使用者日常行車使用的情境去考慮。
@@ -45,4 +45,3 @@
 停車場站可提供的資料有:名稱、地址、經緯度、目前空位。
 請考慮空位資料變更頻率不固定且頻繁變更。
 ```
-![Parklots Backend](https://user-images.githubusercontent.com/26900749/161312275-7c3fdb41-2536-4ac2-a6b2-7fbde11e5d99.jpg)
