@@ -18,7 +18,8 @@ class Order:
 
     def _calc_adjustment_total(self):
         self.discount_total = 0
-        if self.promotion.rule.is_eligible(self):
+        if self.promotion.rule.is_eligible(self) and (
+                self.promotion.limit is None or self.promotion.limit.is_eligible(self)):
             self.computed_discount = self.promotion.action.perform(self)
             if self.promotion.limit is not None:
                 self.promotion.limit.perform(self)
